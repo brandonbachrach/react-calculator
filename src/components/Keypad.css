@@ -1,0 +1,37 @@
+#keypad_container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+#keypad_container button {
+  padding: 20px;
+  width: 100%;
+}
+
+#clear_container {
+  grid-column: 1;
+}
+
+#plus_minus_container {
+  grid-column: 2;
+}
+
+#percent_container {
+  grid-column: 3;
+}
+
+#number_container {
+  grid-column: 1 / span 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#number_container button[name="0"] {
+  grid-column: 1 / span 2;
+}
+
+#operator_container {
+  grid-column: 4;
+  grid-row: 1/5;
+}

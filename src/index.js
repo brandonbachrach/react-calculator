@@ -1,0 +1,18 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import Calculator from "./components/Calculator";
+import registerServiceWorker from "./registerServiceWorker";
+
+import "./styles.css";
+
+function App() {
+  return (
+    <div className="App">
+      <Calculator />
+    </div>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+registerServiceWorker();
