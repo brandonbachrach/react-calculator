@@ -1,4 +1,12 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 .App {
   font-family: sans-serif;
   text-align: center;
+  height: 100vh;
+  display: grid;
+  background: linear-gradient(#264ed1, #201e20);
 }

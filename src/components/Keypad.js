@@ -19,7 +19,9 @@ export default function Keypad(props) {
   return (
     <div id="keypad_container">
       <section id="clear_container">
-        <button onClick={props.onClear}>Clear</button>
+        <button onClick={props.displayVal ? props.onClear : props.onClearAll}>
+          {props.displayVal ? "CE" : "AC"}
+        </button>
       </section>
       <section id="plus_minus_container">
         <button onClick={props.onNegate}>+/-</button>

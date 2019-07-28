@@ -8,13 +8,14 @@ export default class Calculator extends Component {
     super(props);
     this.state = {
       display: "",
-      result: "",
+      result: 0,
       prevValIsOperator: false
     };
 
     this.handleAppend = this.handleAppend.bind(this);
     this.handleAppendOp = this.handleAppendOp.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.handleClearAll = this.handleClearAll.bind(this);
     this.handleCalc = this.handleCalc.bind(this);
     this.handlePercent = this.handlePercent.bind(this);
     this.handleNegate = this.handleNegate.bind(this);
@@ -22,15 +23,15 @@ export default class Calculator extends Component {
 
   handleAppend(num) {
     if (
-      (num === "0" && this.state.display === "") ||
-      (num === "." && this.state.display.slice(-1)[0] === ".") ||
-      (num === "." && this.state.prevValIsOperator)
+      (num === "0" && this.state.display) === "" ||
+      (num === "." && this.state.display.toString().slice(-1)[0] === ".") ||
+      (num === "." && this.state.prevValIsOperator) ||
+      (num === "." && this.state.display.toString().indexOf(".") !== -1)
     ) {
       return;
     }
 
     if (num === "." && this.state.display === "") {
-      console.log("test");
       this.setState({
         display: "0" + num
       });
@@ -67,12 +68,20 @@ export default class Calculator extends Component {
     });
   }
 
+  handleClearAll() {
+    this.setState({
+      display: "",
+      result: 0
+    });
+  }
+
   handleCalc() {
     if (this.state.display === "" || this.state.prevValIsOperator) {
       return;
     }
     this.setState({
-      display: eval(this.state.display)
+      display: eval(this.state.display),
+      result: eval(this.state.display)
     });
   }
 
@@ -81,7 +90,8 @@ export default class Calculator extends Component {
       return;
     }
     this.setState({
-      display: eval(this.state.display) / 100
+      display: eval(this.state.display) / 100,
+      result: eval(this.state.display) / 100
     });
   }
 
@@ -90,23 +100,27 @@ export default class Calculator extends Component {
       return;
     }
     this.setState({
-      display: this.state.display - this.state.display * 2
+      display: "",
+      result: this.state.display - this.state.display * 2
     });
   }
 
   render() {
     return (
-      <div id="calculator_container">
-        <Screen display={this.state.display} />
+      <main id="calculator_container">
+        <Screen display={this.state.display} result={this.state.result} />
         <Keypad
+          displayVal={this.state.display}
+          resultVal={this.state.result}
           onClickNum={this.handleAppend}
           onClickOp={this.handleAppendOp}
           onClear={this.handleClear}
+          onClearAll={this.handleClearAll}
           onCalc={this.handleCalc}
           onPercent={this.handlePercent}
           onNegate={this.handleNegate}
         />
-      </div>
+      </main>
     );
   }
 }

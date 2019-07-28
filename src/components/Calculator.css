@@ -1,6 +1,7 @@
 #calculator_container {
   width: 35vw;
-  height: 70vh;
+  max-width: 250px;
+  height: 38vh;
   margin: auto;
   background-color: #ccc;
   padding: 20px;
